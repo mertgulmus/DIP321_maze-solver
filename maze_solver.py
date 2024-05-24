@@ -1,3 +1,4 @@
+import os
 import time
 from collections import deque
 
@@ -69,6 +70,8 @@ def dfs(maze, start):
 def solveMaze(maze, method):
     # Function to solve the maze using the specified method ('bfs' or 'dfs')
     start = findStart(maze)
+    if not start:
+        return None, 0  # No starting point found
     if method == 'bfs':
         return bfs(maze, start)
     elif method == 'dfs':
@@ -77,13 +80,21 @@ def solveMaze(maze, method):
         raise ValueError("Invalid method. Use 'bfs' or 'dfs'.")
 
 if __name__ == '__main__':
-    maze = loadMaze('mazes/maze_11x11.txt')  # Load the maze
+    mazes_folder = os.path.join(os.getcwd(), 'mazes')  # Folder containing maze files
+    maze_files = [f for f in os.listdir(mazes_folder) if f.endswith('.txt')]
 
-    start_time = time.time()  # Start timing
-    path, coins = solveMaze(maze, 'bfs')  # Solve the maze using BFS
-    end_time = time.time()  # End timing
+    for maze_file in maze_files:
+        print(f"\nProcessing maze file: {maze_file}")
+        maze = loadMaze(os.path.join(mazes_folder, maze_file))  # Load the maze
 
-    # Output the results
-    print(f"Path: {path}")
-    print(f"Coins collected: {coins}")
-    print(f"Execution time: {end_time - start_time} seconds")
+        start_time = time.time()  # Start timing
+        path, coins = solveMaze(maze, 'bfs')  # Solve the maze using BFS
+        end_time = time.time()  # End timing
+
+        # Output the results
+        if path:
+            print(f"Path: {path}")
+            print(f"Coins collected: {coins}")
+        else:
+            print("No solution found.")
+        print(f"Execution time: {end_time - start_time} seconds")
