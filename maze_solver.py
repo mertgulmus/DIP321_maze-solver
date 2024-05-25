@@ -1,3 +1,8 @@
+# Team members:
+# - Mert Gulmus (211ADB070)
+# - Rustam Rahimov (211ADB058)
+# - Pavlo Nikolaiev (201ADB090)
+
 import os
 import time
 
