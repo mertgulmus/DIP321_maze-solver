@@ -143,7 +143,7 @@ void display() { // display the final result
 }
 
 int main() {
-    int c = IntLinList("maze_101x101.txt"); //specify the path
+    int c = IntLinList("mazes/maze_101x101.txt"); //specify the path
     display();
 
 }
